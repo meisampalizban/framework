@@ -234,6 +234,7 @@ if (! function_exists('doctype'))
 
 // ------------------------------------------------------------------------
 
+
 if (! function_exists('script_tag'))
 {
 	/**
@@ -243,15 +244,19 @@ if (! function_exists('script_tag'))
 	 *
 	 * @param mixed   $src       Script source or an array
 	 * @param boolean $indexPage Should indexPage be added to the JS path
-	 *
+	 * @param mixed  $type  is type script tag defulte is text/javascript
+	 * @param mixed  $def_asy  this def_asy in  script tag for  defer or async
 	 * @return string
 	 */
-	function script_tag($src = '', bool $indexPage = false): string
+	function script_tag($src = '', bool $indexPage = false , $type = '' , $def_asy = ''): string
 	{
 		$script = '<script ';
 		if (! is_array($src))
 		{
 			$src = ['src' => $src];
+		}
+		if(empty($type)){
+				$type="text/javascript";
 		}
 
 		foreach ($src as $k => $v)
@@ -273,7 +278,7 @@ if (! function_exists('script_tag'))
 			}
 		}
 
-		return $script . 'type="text/javascript"' . '></script>';
+		return $script . 'type="'.$type.'"' .$def_asy. '></script>';
 	}
 }
 
